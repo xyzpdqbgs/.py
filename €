@@ -1,0 +1,52 @@
+import random
+import tkinter as tk
+from datetime import datetime
+
+app = tk.Tk()
+
+app.title("Euromilhõ€s")
+app.geometry('500x200')
+
+lbl = tk.Label(app, text="Chaves Geradas")
+lbl.pack()
+
+chaves=[]
+
+
+def btn1():
+    numeros=random.sample(range(1,51),5)
+    estrelas=random.sample(range(1,13),2)
+    chave={'numeros':sorted(numeros), 'estrelas':sorted(estrelas)}
+    chaves.append(chave)
+    lst.insert(tk.END,chave)
+    
+def btn2():
+    mostrarChaves()
+    
+    
+def mostrarChaves():
+    top = tk.Toplevel(app)
+    top.title("Chaves Geradas")
+    
+    text=tk.Text(top)
+    text.pack()
+    
+    for chave in chaves:
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        text.insert(tk.END, f"{timestamp} {chave}\n")
+    
+
+
+btn1 = tk.Button(app, text="Gerar Chave do Euromilhões", command=btn1)
+btn1.pack(side=tk.TOP, padx=10, pady=10)
+
+
+btn2 = tk.Button(app, text="Ver Todas as Chaves", command=btn2)
+btn2.pack(side=tk.LEFT, padx=10, pady=10)
+
+
+lst = tk.Listbox(app, width=25)
+lst.pack(padx=10, pady=10, fill=tk.Y)
+
+
+app.mainloop()
